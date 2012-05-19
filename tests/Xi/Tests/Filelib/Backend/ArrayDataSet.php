@@ -8,7 +8,7 @@ use \PHPUnit_Util_Filter,
     \PHPUnit_Extensions_Database_DataSet_DefaultTable,
     \PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
     ;
-    
+
 // PHPUnit_Util_Filter::addFileToFilter(__FILE__, 'PHPUNIT');
 
 
@@ -42,15 +42,15 @@ class ArrayDataSet extends PHPUnit_Extensions_Database_DataSet_AbstractDataSet
 
     protected function createIterator($reverse = FALSE)
     {
-        
-        
+
+
         return new PHPUnit_Extensions_Database_DataSet_DefaultTableIterator($this->tables, $reverse);
     }
 
     public function getTable($tableName)
     {
         if (!isset($this->tables[$tableName])) {
-            throw new InvalidArgumentException("$tableName is not a table in the current database.");
+            throw new \InvalidArgumentException("$tableName is not a table in the current database.");
         }
 
         return $this->tables[$tableName];

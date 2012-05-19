@@ -276,7 +276,7 @@ class DefaultFileOperatorTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function addProfileShouldFailWhenProfileAlreadyExists()
     {
@@ -303,7 +303,7 @@ class DefaultFileOperatorTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function getProfileShouldFailWhenProfileDoesNotExist()
     {
@@ -636,7 +636,7 @@ class DefaultFileOperatorTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function settingInvalidstrategyShouldThrowException()
     {

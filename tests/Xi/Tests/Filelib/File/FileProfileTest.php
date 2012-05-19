@@ -162,7 +162,7 @@ class FileProfileTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function setIdentifierShouldFailWithOriginalAsIdentifier()
     {
@@ -274,7 +274,7 @@ class FileProfileTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function getVersionProviderShouldFailWithNonExistingVersion()
     {

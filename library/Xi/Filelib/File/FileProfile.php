@@ -12,7 +12,7 @@ use Xi\Filelib\Plugin\VersionProvider\VersionProvider;
 use Xi\Filelib\File\File;
 use Xi\Filelib\Event\PluginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 
 /**
  * File profile

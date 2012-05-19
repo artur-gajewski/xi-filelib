@@ -104,7 +104,7 @@ class FileLibraryTest extends TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function setTempDirShouldFailWhenDirectoryDoesNotExists()
     {
@@ -115,7 +115,7 @@ class FileLibraryTest extends TestCase
 
      /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function setTempDirShouldFailWhenDirectoryIsNotWritable()
     {

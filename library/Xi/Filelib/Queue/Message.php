@@ -2,7 +2,7 @@
 
 namespace Xi\Filelib\Queue;
 
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 
 /**
  * Filelib queue message

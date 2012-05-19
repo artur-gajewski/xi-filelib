@@ -2,11 +2,10 @@
 
 namespace Xi\Filelib;
 
+use Xi\Filelib\Exception\InvalidArgumentException;
+
 /**
  * Configurator
- *
- * @author pekkis
- *
  */
 class Configurator
 {
@@ -21,11 +20,11 @@ class Configurator
     public static function setOptions($object, $options)
     {
         if (!is_object($object)) {
-            throw new \InvalidArgumentException("Non-object supplied as subject");
+            throw new InvalidArgumentException("Non-object supplied as subject");
         }
-        
+
         if (!is_array($options)) {
-            throw new \InvalidArgumentException("Non-array supplied as options");
+            throw new InvalidArgumentException("Non-array supplied as options");
         }
 
         foreach ($options as $key => $value) {
@@ -41,17 +40,18 @@ class Configurator
      *
      * @param $object object Object to set
      * @param $options mixed Options to set as zend config or array.
+     * @throws InvalidArgumentException
      */
     public static function setConstructorOptions($object, $options)
     {
         if (!is_object($object)) {
-            throw new \InvalidArgumentException("Non-object supplied as subject");
+            throw new InvalidArgumentException("Non-object supplied as subject");
         }
-        
+
         if (!is_array($options)) {
-            throw new \InvalidArgumentException("Non-array supplied as options");
+            throw new InvalidArgumentException("Non-array supplied as options");
         }
-        
+
         foreach ($options as $key => &$value) {
             if (is_array($value) && isset($value['class'])) {
                 $classified = new $value['class'];

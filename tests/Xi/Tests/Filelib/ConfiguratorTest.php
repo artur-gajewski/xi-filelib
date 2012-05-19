@@ -12,25 +12,25 @@ class ConfiguratorTest extends \Xi\Tests\TestCase
      */
     public function setOptionsShouldSetOptions()
     {
-        
+
         $mock = $this->getMock('\Xi\Filelib\File\FileItem');
         $mock->expects($this->once())
              ->method('setName')
              ->with('looooso')
              ->will($this->returnValue('1'))
              ;
-        
+
         $mock->expects($this->exactly(0))
              ->method('setMimetype')
              ->will($this->returnValue('1'));
-             
+
         $arr = array(
             'mimetypeee' => 'tussi',
             'name' => 'looooso'
         );
-        
+
         \Xi\Filelib\Configurator::setOptions($mock, $arr);
-        
+
     }
 
     /**
@@ -43,69 +43,69 @@ class ConfiguratorTest extends \Xi\Tests\TestCase
              ->method('setName')
              ->will($this->returnValue('1'))
              ;
-        
+
         $mock->expects($this->exactly(0))
              ->method('setMimetype')
              ->will($this->returnValue('1'));
-             
+
         $arr = array();
-        
+
         \Xi\Filelib\Configurator::setOptions($mock, $arr);
-        
+
     }
 
-    
+
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     */ 
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
+     */
     public function setOptionsShouldThrowExceptioWithNonObjectSubject()
     {
         Configurator::setOptions('luuden', array());
     }
-    
-   
+
+
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     */ 
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
+     */
     public function setOptionsShouldThrowExceptioWithNonArrayOptions()
     {
         $mock = $this->getMock('Xi\Filelib\File\FileItem');
         Configurator::setOptions($mock, 'lussutilukset');
     }
 
-    
+
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     */ 
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
+     */
     public function setConstructorOptionsShouldThrowExceptioWithNonObjectSubject()
     {
         Configurator::setConstructorOptions('lus', array());
     }
-    
-   
+
+
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     */ 
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
+     */
     public function setConstructorOptionsShouldThrowExceptioWithNonArrayOptions()
     {
         $mock = $this->getMock('Xi\Filelib\File\FileItem');
         Configurator::setConstructorOptions($mock, 'xoo-xer');
     }
-    
-    
+
+
     /**
      * @test
      */
     public function constructorOptionsShouldRecurseToInnerClasses()
     {
-                
+
         $mock = $this->getMockBuilder('Xi\Tests\Filelib\File\FileItem')->setMethods(array('setName'))->getMock();
-        
-                
+
+
         $mock->expects($this->exactly(1))
              ->method('setName')
              ->with($this->isInstanceOf('Xi\Tests\Filelib\File\FileItem'))
@@ -119,14 +119,14 @@ class ConfiguratorTest extends \Xi\Tests\TestCase
                     'mimetype' => 'tussi',
                 ),
             )
-            
+
         );
-        
+
         Configurator::setConstructorOptions($mock, $arr);
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 }

@@ -14,7 +14,7 @@ use Xi\Filelib\Acl\Acl;
 use Xi\Filelib\File\FileProfile;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 use Xi\Filelib\Event\PluginEvent;
 use Xi\Filelib\Event\FilelibEvent;
 use Xi\Filelib\Queue\Queue;

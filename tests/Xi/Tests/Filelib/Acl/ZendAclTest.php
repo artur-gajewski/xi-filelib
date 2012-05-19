@@ -14,57 +14,57 @@ use Xi\Filelib\Acl\Acl,
 
 class ZendAclTest extends \Xi\Tests\Filelib\TestCase
 {
-    
+
     /**
      *
      * @var ZendAcl
      */
     private $acl;
-    
-    
+
+
     public function setUp()
     {
         if (!class_exists('\Zend_Acl')) {
             $this->markTestSkipped("Zend Acl could not be loaded");
         }
-        
+
         $this->acl = new ZendAcl(true);
-        
-        
+
+
         $zacl = new Zend_Acl();
-        
+
         $zacl->addRole('pekkis');
         $zacl->addRole('anonymous');
-        
+
         $zacl->deny('pekkis');
         $zacl->deny('anonymous');
-                
+
         $zacl->addResource('Xi_Filelib_Folder_1');
         $zacl->addResource('Xi_Filelib_Folder_2');
-        
-        
+
+
         $zacl->addResource('Xi_Filelib_File_1');
         $zacl->addResource('Xi_Filelib_File_2');
         $zacl->addResource('Xi_Filelib_File_3');
 
-        
+
         $zacl->allow('pekkis', 'Xi_Filelib_Folder_1');
         $zacl->allow('pekkis', 'Xi_Filelib_Folder_2', 'read');
-        
-        
+
+
         $zacl->allow('pekkis', 'Xi_Filelib_File_2');
         $zacl->allow('pekkis', 'Xi_Filelib_File_3', 'read');
-        
+
         $zacl->allow('anonymous', 'Xi_Filelib_File_3');
-        
-        
+
+
         $this->acl->setRole('pekkis');
         $this->acl->setAnonymousRole('anonymous');
         $this->acl->setAcl($zacl);
-        
+
     }
-    
-    
+
+
     /**
      * @test
      */
@@ -73,8 +73,8 @@ class ZendAclTest extends \Xi\Tests\Filelib\TestCase
         $this->assertTrue(class_exists('Xi\Filelib\Acl\ZendAcl'));
         $this->assertContains('Xi\Filelib\Acl\Acl', class_implements('Xi\Filelib\Acl\ZendAcl'));
     }
-    
-    
+
+
     public function provideFolders()
     {
         return array(
@@ -101,15 +101,15 @@ class ZendAclTest extends \Xi\Tests\Filelib\TestCase
                 false
             ),
         );
-        
+
     }
-    
-    
-    
-    
+
+
+
+
     public function provideFiles()
     {
-    
+
         return array(
             array(
                 array(
@@ -122,7 +122,7 @@ class ZendAclTest extends \Xi\Tests\Filelib\TestCase
                 false,
                 false
             ),
-            
+
             array(
                 array(
                    'id' => 2,
@@ -146,103 +146,103 @@ class ZendAclTest extends \Xi\Tests\Filelib\TestCase
                 false,
                 true
             ),
-            
+
         );
-        
+
     }
-    
+
     /**
      * @test
      */
     public function settersAndGettersShouldGetAndSet()
     {
         $acl = new ZendAcl();
-        
+
         $this->assertNull($acl->getAcl());
         $this->assertNull($acl->getRole());
         $this->assertNull($acl->getAnonymousRole());
-        
-        
+
+
         $zacl = new Zend_Acl();
         $role = "tussi";
         $anonymousRole = 'loso';
-        
+
         $this->assertSame($acl, $acl->setAcl($zacl));
         $this->assertSame($acl, $acl->setRole($role));
         $this->assertSame($acl, $acl->setAnonymousRole($anonymousRole));
-                
+
         $this->assertEquals($zacl, $acl->getAcl());
         $this->assertEquals($role, $acl->getRole());
         $this->assertEquals($anonymousRole, $acl->getAnonymousRole());
-        
+
     }
-    
+
     /**
      * @test
      * @dataProvider provideFiles
      */
     public function isReadableShouldReturnExpectedResultsForFiles($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FileItem::create($res);        
+        $res = FileItem::create($res);
         $this->assertEquals($readable, $this->acl->isFileReadable($res));
     }
-    
+
     /**
      * @test
      * @dataProvider provideFolders
      */
     public function IsReadableShouldReturnExpectedResultForFolders($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FolderItem::create($res);        
+        $res = FolderItem::create($res);
         $this->assertEquals($readable, $this->acl->isFolderReadable($res));
     }
 
-    
+
     /**
      * @test
      * @dataProvider provideFiles
      */
     public function isWritableShouldReturnExpectedResultsForFiles($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FileItem::create($res);        
+        $res = FileItem::create($res);
         $this->assertEquals($writable, $this->acl->isFileWritable($res));
     }
-    
-    
+
+
     /**
      * @test
      * @dataProvider provideFolders
      */
     public function IsWritableShouldReturnExpectedResultForFolders($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FolderItem::create($res);        
+        $res = FolderItem::create($res);
         $this->assertEquals($writable, $this->acl->isFolderWritable($res));
     }
-    
-    
+
+
     /**
      * @test
      * @dataProvider provideFiles
      */
     public function isAnonymousReadableShouldReturnExpectedResultsForFiles($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FileItem::create($res);        
+        $res = FileItem::create($res);
         $this->assertEquals($readableByAnonymous, $this->acl->isFileReadableByAnonymous($res));
     }
-    
-    
+
+
     /**
      * @test
      * @dataProvider provideFolders
      */
     public function IsAnonymousReadableShouldReturnExpectedResultForFolders($res, $readable, $writable, $readableByAnonymous)
     {
-        $res = FolderItem::create($res);        
+        $res = FolderItem::create($res);
         $this->assertEquals($readableByAnonymous, $this->acl->isFolderReadableByAnonymous($res));
     }
-    
-    
-    
+
+
+
         /**
      * @test
      */
@@ -262,41 +262,41 @@ class ZendAclTest extends \Xi\Tests\Filelib\TestCase
             'url' => 'tussutus'
         ));
 
-        
-        
+
+
         $file = FileItem::create(array(
             'id' => 272,
         ));
-        
-        
+
+
         $file2 = FileItem::create(array(
             'id' => 276,
         ));
-        
-        
+
+
         $this->assertEquals('Xi_Filelib_File_272', $this->acl->getResourceIdentifier($file));
         $this->assertEquals('Xi_Filelib_File_276', $this->acl->getResourceIdentifier($file2));
-        
+
         $this->assertEquals('Xi_Filelib_Folder_4', $this->acl->getResourceIdentifier($folder));
         $this->assertEquals('Xi_Filelib_Folder_6', $this->acl->getResourceIdentifier($folder2));
-        
+
     }
-    
+
     /**
      * @test
-     * @expectedException \InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function getResourceIdentifierShouldThrowExceptionForNonIdentifiableObjects()
     {
         $diterator = new \DirectoryIterator(ROOT_TESTS);
-        
+
         return $this->acl->getResourceIdentifier($diterator);
-        
+
     }
 
-    
-    
-    
-    
-    
+
+
+
+
+
 }

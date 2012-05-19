@@ -9,7 +9,7 @@ use Xi\Filelib\Queue\Queue;
 use Xi\Filelib\Queue\Message;
 use Xi\Filelib\Command;
 use ReflectionObject;
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 use Xi\Filelib\FilelibException;
 
 /**

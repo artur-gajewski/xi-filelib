@@ -8,7 +8,7 @@ use Xi\Filelib\Folder\FolderOperator;
 use Xi\Filelib\AbstractOperator;
 use Xi\Filelib\FilelibException;
 use Xi\Filelib\Plugin\Plugin;
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 use Xi\Filelib\File\File;
 use Xi\Filelib\Folder\Folder;
 use Xi\Filelib\Acl\Acl;

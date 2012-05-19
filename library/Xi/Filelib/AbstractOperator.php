@@ -13,6 +13,7 @@ use Xi\Filelib\Acl\Acl;
 use Xi\Filelib\Command;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Xi\Filelib\Queue\Message;
+use Xi\Filelib\Exception\InvalidArgumentException;
 
 /**
  * Abstract convenience class for operators
@@ -119,7 +120,7 @@ abstract class AbstractOperator
     private function assertCommandExists($command)
     {
         if (!isset($this->commandStrategies[$command])) {
-            throw new \InvalidArgumentException("Command '{$command}' is not supported");
+            throw new InvalidArgumentException("Command '{$command}' is not supported");
         }
     }
 
@@ -127,7 +128,7 @@ abstract class AbstractOperator
     private function assertStrategyExists($strategy)
     {
         if (!in_array($strategy, array(Command::STRATEGY_ASYNCHRONOUS, Command::STRATEGY_SYNCHRONOUS))) {
-            throw new \InvalidArgumentException("Invalid command strategy '{$strategy}'");
+            throw new InvalidArgumentException("Invalid command strategy '{$strategy}'");
         }
     }
 

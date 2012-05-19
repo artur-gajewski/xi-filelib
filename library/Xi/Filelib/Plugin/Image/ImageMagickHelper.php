@@ -4,7 +4,7 @@ namespace Xi\Filelib\Plugin\Image;
 
 use Imagick;
 use ImagickException;
-use InvalidArgumentException;
+use Xi\Filelib\Exception\InvalidArgumentException;
 use Xi\Filelib\Configurator;
 use Xi\Filelib\Plugin\Image\Command\Command;
 
@@ -81,7 +81,7 @@ class ImageMagickHelper
 
     /**
      * Creates a new imagick resource from path
-     * 
+     *
      * @param string $path Image path
      * @return Imagick
      * @throws InvalidArgumentException
@@ -97,21 +97,21 @@ class ImageMagickHelper
 
     /**
      * Creates and returns a command from config array
-     * 
+     *
      * @param array $arr Config array
-     * @return Command 
+     * @return Command
      */
     public function createCommandFromArray($arr)
     {
         if (!is_array($arr) || !isset($arr['type']) || !is_string($arr['type'])) {
-            throw new \InvalidArgumentException("Command class missing");
+            throw new InvalidArgumentException("Command class missing");
         }
 
         $className = $arr['type'];
         unset($arr['type']);
 
         if (!class_exists($className)) {
-            throw new \InvalidArgumentException(sprintf("Class '%s' does not exist", $className));
+            throw new InvalidArgumentException(sprintf("Class '%s' does not exist", $className));
         }
 
         $command = new $className($arr);

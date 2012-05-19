@@ -22,7 +22,7 @@ class MessageTest extends \Xi\Tests\Filelib\TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Xi\Filelib\Exception\InvalidArgumentException
      */
     public function messageInitializationShouldThrowExceptionWhenBodyIsNotString()
     {
